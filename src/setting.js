@@ -1,10 +1,13 @@
 
 var SettingLayer = cc.Layer.extend({
     sprite:null,
-    ctor:function () {
+    setting: null,
+    ctor:function (setting) {
         this._super();
         var size = cc.winSize;
 
+        this.setting = setting;
+        //cc.log("this.setting:gn:" + this.setting.gn);
         var title = new cc.LabelTTF("Setting","",36);
         title.attr({
             x: size.width / 2,
@@ -29,15 +32,19 @@ var SettingLayer = cc.Layer.extend({
     },
 
     setG2: function () {
+        this.setting.gn = 2;
         cc.director.popScene();
     },
     setG3: function () {
+        this.setting.gn = 3;
         cc.director.popScene();
     },
     setG4: function () {
+        this.setting.gn = 4;
         cc.director.popScene();
     },
     setG5: function () {
+        this.setting.gn = 5;
         cc.director.popScene();
     },
 
@@ -50,7 +57,7 @@ var SettingScene = cc.Scene.extend({
         this._super();
 
         //cc.log("GN = " + setting.gn);
-        var layer = new SettingLayer();
+        var layer = new SettingLayer(setting);
         this.addChild(layer);
     },
     // onEnter:function () {
