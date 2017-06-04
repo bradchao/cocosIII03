@@ -6,6 +6,8 @@ var Brad01Layer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
 
+        cc.log("Brad01:setting:gn = " + this.setting.gn);
+
         this.n8 = new cc.Sprite("res/imgs/number8.png");
         this.n8.attr({
             x: size.width / 2,
@@ -54,7 +56,9 @@ var Brad01Layer = cc.Layer.extend({
     },
 
     item1Callback: function (sender) {
-        cc.director.pushScene(new cc.TransitionFadeTR(1, new Brad02Scene()));
+        cc.director.pushScene(
+            new cc.TransitionFadeTR(
+                1, new Brad02Scene(this.setting)));
     },
     item2Callback: function (sender) {
         cc.log("setting");

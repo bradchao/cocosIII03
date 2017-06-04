@@ -11,9 +11,14 @@ var Brad02Layer = cc.Layer.extend({
     counter : 0,
     inputString: '',    // string var
     answer : createAnswer(),
-    ctor: function () {
+    setting: null,
+    ctor: function (setting) {
         this._super();
         var size = cc.winSize;
+
+        this.setting = setting;
+        this.answer = createAnswer(this.setting.gn);
+        cc.log("answer: " + this.answer);
 
         var myTitle = new cc.LabelTTF("猜數字遊戲", "Arial", 48);
         myTitle.x = size.width / 2;
@@ -191,11 +196,17 @@ var Brad02Layer = cc.Layer.extend({
 });
 
 var Brad02Scene = cc.Scene.extend({
-    onEnter: function () {
+    ctor: function (setting) {
         this._super();
-        var layer = new Brad02Layer();
+
+        var layer = new Brad02Layer(setting);
         this.addChild(layer);
-    }
+    },
+    // onEnter: function () {
+    //     this._super();
+    //     var layer = new Brad02Layer();
+    //     this.addChild(layer);
+    // }
 });
 
 function checkAB(ans, guess) {
@@ -209,10 +220,16 @@ function checkAB(ans, guess) {
     }
     return a + "A" + b +"B";
 }
-function createAnswer() {
+function createAnswer(d) {
     var n = [0,1,2,3,4,5,6,7,8,9];
     n = shuffle(n);
-    return '' + n[0] + n[1] + n[2];
+
+    var ret = "";
+    for (i=0; i<d; i++){
+        ret += n[i];
+    }
+
+    return ret;
 }
 function myLottery(){
     var n = new Array(49);
