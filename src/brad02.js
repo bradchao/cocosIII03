@@ -3,6 +3,7 @@ var Brad02Layer = cc.Layer.extend({
     nums: new Array(10),
     rects: new Array(10),
     back: null,
+    home: null,
     enter: null,
     mesg : null,
     winner:null,
@@ -71,6 +72,13 @@ var Brad02Layer = cc.Layer.extend({
         });
         this.addChild(this.back);
 
+        this.home = new cc.Sprite(res.back_png);
+        this.home.attr({
+            x: cc.winSize.width * 5 / 6,
+            y: cc.winSize.height * 1 / 8
+        });
+        this.addChild(this.home);
+
         this.enter = new cc.Sprite(res.enter_png);
         this.enter.attr({
             x: cc.winSize.width * 4 / 6,
@@ -120,12 +128,25 @@ var Brad02Layer = cc.Layer.extend({
                     var y = event.getLocationY();
                     var point = new cc.Point(x,y);
 
+                    // <home>
+                    var rectHome = new cc.Rect(layer.home.x-layer.home.width/2,
+                        layer.home.y-layer.home.height/2,
+                        layer.home.width,
+                        layer.home.height);
+                    if (cc.rectContainsPoint(rectHome, point)){
+                        cc.director.popScene();
+                        return;
+                    }
+
                     if (layer.inputString.length>0){
                         // <back>
                         var rect = new cc.Rect(layer.back.x-layer.back.width/2,
                             layer.back.y-layer.back.height/2,
                             layer.back.width,
                             layer.back.height);
+
+
+
                         if (cc.rectContainsPoint(rect, point)){
                             //
                             cc.log("back");
