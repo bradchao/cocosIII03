@@ -19,7 +19,7 @@ var Brad02Layer = cc.Layer.extend({
 
         this.setting = setting;
         this.answer = createAnswer(this.setting.gn);
-        cc.log("answer: " + this.answer);
+        //cc.log("answer: " + this.answer);
 
         var myTitle = new cc.LabelTTF("猜數字遊戲", "Arial", 48);
         myTitle.x = size.width / 2;
@@ -93,7 +93,7 @@ var Brad02Layer = cc.Layer.extend({
         });
         this.addChild(this.input);
 
-        this.mesg = new cc.LabelTTF("輸入三位數","",48);
+        this.mesg = new cc.LabelTTF("輸入" + this.setting.gn + "位數","",48);
         this.mesg.attr({
             x: cc.winSize.width / 2,
             y: cc.winSize.height *5/8
@@ -160,7 +160,7 @@ var Brad02Layer = cc.Layer.extend({
                         }
                     }
 
-                    if (layer.inputString.length==3){
+                    if (layer.inputString.length==layer.setting.gn){
                         // <enter>
                         var rect = new cc.Rect(layer.enter.x-layer.enter.width/2,
                             layer.enter.y-layer.enter.height/2,
@@ -171,7 +171,7 @@ var Brad02Layer = cc.Layer.extend({
                             layer.mesg.setString(result);
                             layer.counter++;
 
-                            if (result === "3A0B") {
+                            if (result === layer.setting.gn + "A0B") {
                                 layer.winner.setVisible(true);
                             }else if (layer.counter == 10){
                                 layer.loser.setVisible(true);
@@ -191,7 +191,7 @@ var Brad02Layer = cc.Layer.extend({
                                 break;
                             }
                         }
-                        if (layer.inputString.length==3){
+                        if (layer.inputString.length==layer.setting.gn){
                             layer.input.setColor(cc.color(255,0,0));
                         }
                     }
