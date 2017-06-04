@@ -13,6 +13,9 @@
 
     "jsList" : [
         "src/resource.js",
+        "src/brad01.js",
+        "src/brad02.js",
+        "src/setting.js",
         "src/app.js"
     ]
 }
